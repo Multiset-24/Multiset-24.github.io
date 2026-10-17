@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>System Design (Hinglish) · Saurav Chaurasiya</title>
+  <meta name="description" content="HLD + LLD system design notes in Hinglish for SDE-1/SDE-2 interviews, with a focus on payments: UPI, wallets, ledgers, reconciliation.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232f6fdd'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='sans-serif'%3ESD%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/themes/vue.css" media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/themes/dark.css" media="(prefers-color-scheme: dark)">
+  <style>
+    :root { --theme-color: #2f6fdd; }
+    .markdown-section { max-width: 860px; }
+    .markdown-section table { display: block; overflow-x: auto; }
+    .markdown-section pre > code { font-size: 0.85rem; }
+    .mermaid { margin: 1.2em 0; text-align: center; overflow-x: auto; }
+    .sidebar-nav > ul > li > strong { display: block; margin-top: 0.8em; }
+  </style>
+</head>
+<body>
+  <div id="app">Loading…</div>
+  <script>
+    var dark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    // Mermaid fences become <div class="mermaid">, drawn after each page renders.
+    function escapeHtml(s) {
+      return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    window.$docsify = {
+      name: "System Design · Hinglish",
+      repo: "https://github.com/Multiset-24/Multiset-24.github.io",
+      loadSidebar: "_sidebar.md",
+      alias: { "/.*/_sidebar.md": "/_sidebar.md" },
+      subMaxLevel: 2,
+      auto2top: true,
+      search: { placeholder: "Search", noData: "Kuch nahi mila", depth: 3 },
+      markdown: {
+        renderer: {
+          code: function (code, lang) {
+            if (lang === "mermaid") return '<div class="mermaid">' + escapeHtml(code) + "</div>";
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      },
+      plugins: [
+        function (hook) {
+          hook.doneEach(function () {
+            if (window.mermaid) window.mermaid.run({ querySelector: ".markdown-section .mermaid" });
+          });
+        }
+      ]
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2.1.1/dist/docsify-copy-code.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-lua.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-protobuf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: false, theme: dark ? "dark" : "default", securityLevel: "strict" });
+  </script>
+</body>
+</html>
